@@ -4,9 +4,9 @@
 
     <!-- Input -->
     <div class="d-flex">
-      <input type="text" placeholder="Insira a tarefa" class="form-control" />
+      <input v-model="task" type="text" placeholder="Insira a tarefa" class="form-control" />
 
-      <button class="btn btn-warning rounded-0"> Cadastrar </button>
+      <button @click="submitTask" class="btn btn-warning rounded-0"> Cadastrar </button>
     </div>
 
     <!-- Task table -->
@@ -54,6 +54,7 @@ export default {
 
   data(){
     return {
+      task: '123',
       tasks: [
         {
           name: 'Steal bananas from the store.',
@@ -66,6 +67,17 @@ export default {
       ]
 
 
+    }
+  },
+
+  methods: {
+    submitTask(){
+      if(this.task.length===0) return;
+
+      this.tasks.push({
+        name: this.task,
+        status: 'to-do'
+      })
     }
   }
 }
