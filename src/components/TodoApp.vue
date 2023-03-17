@@ -21,8 +21,19 @@
       </thead>
       <tbody>
         <tr v-for="(task, index) in tasks" :key="index">
-          <td>{{task.name}}</td>
-          <td style="width: 120px"><span @click="changeStatus(index)" class="pointer">{{ fistCharUpper(task.status) }}</span></td>
+          <td>
+            <span :class="{ 'finished': task.status === 'finished' }">{{ task.name }}</span>
+          </td>
+          <td style="width: 120px">
+            <span @click="changeStatus(index)" class="pointer" 
+            :class="{'text-danger': task.status === 'to-do',
+                    'text-warning': task.status === 'in-progress',
+                    'text-success': task.status === 'finished'}">
+            
+              {{ fistCharUpper(task.status)
+              
+            }}</span>
+          </td>
           <td>
             <div class="text-center" @click="editTask(index)">
               <span class="fa fa-pen"></span>
@@ -35,11 +46,11 @@
           </td>
         </tr>
       </tbody>
-    
+
     </table>
 
 
-    
+
 
 
   </div>
@@ -52,7 +63,7 @@ export default {
     msg: String
   },
 
-  data(){
+  data() {
     return {
       task: '123',
       editedTask: null,
@@ -74,10 +85,10 @@ export default {
   },
 
   methods: {
-    submitTask(){
-      if(this.task.length===0) return;
+    submitTask() {
+      if (this.task.length === 0) return;
 
-      if(this.editedTask === null){
+      if (this.editedTask === null) {
         this.tasks.push({
           name: this.task,
           status: 'to-do'
@@ -88,22 +99,22 @@ export default {
       }
 
 
-      this.task= '';
+      this.task = '';
 
     },
 
-    deleteTask(index){
+    deleteTask(index) {
       this.tasks.splice(index, 1);
     },
 
-    editTask(index){
+    editTask(index) {
       this.task = this.tasks[index].name;
       this.editedTask = index;
     },
 
     changeStatus(index) {
       let newIndex = this.availableStatuses.indexOf(this.tasks[index].status);
-      if(++newIndex > 2) newIndex = 0;
+      if (++newIndex > 2) newIndex = 0;
       this.tasks[index].status = this.availableStatuses[newIndex];
     },
 
@@ -119,4 +130,7 @@ export default {
   cursor: pointer;
 }
 
+.finished {
+  text-decoration: line-through;
+}
 </style>
