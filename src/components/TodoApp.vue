@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h2 class="text-center mt-5"> Hello!!!</h2>
+    <h2 class="text-center mt-5"> Just a test with vuejs!!!</h2>
 
     <!-- Input -->
     <div class="d-flex">
@@ -31,7 +31,7 @@
                     'text-success': task.status === 'finished'}">
             
               {{ fistCharUpper(task.status)
-              
+
             }}</span>
           </td>
           <td>
@@ -65,7 +65,7 @@ export default {
 
   data() {
     return {
-      task: '123',
+      task: '',
       editedTask: null,
       availableStatuses: ['to-do', 'in-progress', 'finished'],
 
