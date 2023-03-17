@@ -20,9 +20,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Steal bananas from the store.</td>
-          <td>To-do</td>
+        <tr v-for="(task, index) in tasks" :key="index">
+          <td>{{task.name}}</td>
+          <td>{{task.status}}</td>
           <td>
             <div class="text-center">
               <span class="fa fa-pen"></span>
@@ -50,6 +50,23 @@ export default {
   name: "TodoApp",
   props: {
     msg: String
+  },
+
+  data(){
+    return {
+      tasks: [
+        {
+          name: 'Steal bananas from the store.',
+          status: 'to-do',
+        },
+        {
+          name: 'Eat 1kg chocolate in 1 hour.',
+          status: 'in-progress'
+        }
+      ]
+
+
+    }
   }
 }
 </script>
